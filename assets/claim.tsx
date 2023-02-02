@@ -163,10 +163,6 @@ async function claimReward(): Promise<void> {
         data: Buffer.from([90])
     });
 
-    const transaction = new Transaction();
-    transaction.add(ix);
-    transaction.feePayer = claimer.publicKey;
-
     const message = new TransactionMessage({
         instructions: [ix],
         payerKey: claimer.publicKey,
