@@ -16,6 +16,8 @@
 <body>
 <div>
     <h1>Butterfly Lottery</h1>
+    
+    <p>Butterfly is completely decentralized lottery, where all the data is stored and processed on the Solana Blockchain. Playing the lottery,drawings and the distribution of rewards are carried out on the blockchain. All lottery data and process is transparent and cannot be manipulated by third parties</p>
 
     <h2>Why Butterfly?</h2>
 
@@ -35,7 +37,7 @@
     <p>"The numbers you play + prior hash result" goes into a hash function and the output is saved as new "randomness". The nex player takes this randomness and repeats the process with the number he
         played + output from your has function. Your decision of choosing number 2 or number 3 on your coupon totally changes the result of next draw and all future draws.</p>
 
-    <h2>???(hash function in details)</h2>
+    <p>You can check <a href="https://github.com/butterflylottery/butterflylottery.github.io/blob/main/assets/randomness.ts" target="_blank">here</a> how hash function works</p>
     <p>Randomness is saved on program subregisters. We need a few subregisters to scale Butterfly Lottery. So, many people are able to play at the same time.</p>
     <p>When the countdown time shown on home screen is zero, new draw week begins and subregisters stop saving (we will refer this as "draw" in the text). Randomness in all subregisters, in order by
         register no, go to another hash function with their related main registers</p>
@@ -67,19 +69,19 @@
 
     <h2>How long the derivation of lucky numbers will take depends on the number of subregisters.</h2>
 
-    <p>It can take from 5 minutes up to an hour. Then lucky can be queried from blockchain. ()</p>
+    <p>It can take from 5 minutes up to an hour. Then lucky numbers can be queried from blockchain. ()</p>
     <p>The number of subregisters depends on how often Butterfly Lottery is played. Maximum number of subregisters can be 65,025.</p>
     <p>Once created subregisters can not be deleted.</p>
     <p>Initial randomness in subregisters when first created is "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX".(44 X's).</p>
     <p>Then it is changed as a player uses it.</p>
-    <p>Which subregister will player use is chosen by random generator.</p>
+    <p>Which subregister will player use is chosen by the random generator of player's own device.</p>
 
     <h2>(subcounters randomness and derivation)</h2>
 
     <p>There are two sets of subregisters with their related mainregisters. While one is used for saving data, the data of other one is processed. At every draw they replace eachother. The one that is
         processed starts to save data and the saved data of another is started to be processed.</p>
-    <p>Randomness of subregisters is preserved on the processing. However randomness of mainregisters are modified on the process. Every week after the draw and before the process we will be putting
-        <a href="https://github.com/butterflylottery/butterflylottery.github.io/blob/main/assets/randomness.ts" target="_blank">here</a> randomness values of subregisters and mainregisters. So, if you wish, you can replicate the process and reach the same lucky numbers to make sure lottery results are not manipulated
+    <p>Randomness of subregisters is preserved on the processing. However randomness of mainregisters are modified on the process. Every week after the draw there will be a pause of 2 hours before the process. 
+        During this pause, you can replicate <a href="https://github.com/butterflylottery/butterflylottery.github.io/blob/main/assets/get_randomness.ts" target="_blank">here</a> the process and reach the same lucky numbers to make sure lottery results are not manipulated
         by
         third parties.</p>
 
@@ -94,7 +96,7 @@
 
     <h2>When is Draw?</h2>
 
-    <p>At this moment draw is made every seven days. Countdown is made according to Unix Time Stamp. When countdown is zero someone call Butterfly Lottery smart(link) contract and starts a new week.
+    <p>At this moment draw is made every seven days. Countdown is made according to Unix Time Stamp. When countdown is zero someone <a href="https://github.com/butterflylottery/butterflylottery.github.io/blob/main/assets/get_randomness.ts" target="_blank">call</a> Butterfly Lottery smart contract and starts a new week.
         Seven
         days are added to timestamp and new countdown begins.</p>
 
@@ -103,11 +105,11 @@
 
     <p>All coupons you made are saved on blockchain. And all distributions, calculations and control of coupons are done on blockchain.</p>
     <p>All accounts storing data about past draws are stored on Blockchain and can be seen
-        <a href="https://github.com/butterflylottery/butterflylottery.github.io/blob/main/assets/control_coupons.ts" target="_blank">here</a>.</p>
-    <p>After the draw controllers check each coupon by calling the smart contract. Controllers also get some reward for this process. Anybody can be a controller and earn rewards. Join our discord
+        <a href="https://github.com/butterflylottery/butterflylottery.github.io/blob/main/assets/getArchive.ts" target="_blank">here</a>.</p>
+    <p>After the draw controllers <a href="https://github.com/butterflylottery/butterflylottery.github.io/blob/main/assets/getArchive.ts" target="_blank">check each coupon </a>.</p> by calling the smart contract. Controllers also get some reward for this process. Anybody can be a controller and earn rewards. Join our discord
         channel
         for details (https://discord.gg/pmv9Cuc2DS).
-        You can also host this game on your web site and earn Sol as people play. Join our discord channel for details (https://discord.gg/pmv9Cuc2DS).</p>
+        You can also <a href="https://github.com/butterflylottery/butterflylottery.github.io/blob/main/assets" target="_blank">host this game</a>.</p> on your web site and earn Sol as people play. Join our discord channel for details (https://discord.gg/pmv9Cuc2DS).</p>
 
 
     <h2>How much prize is distributed?</h2>
@@ -116,10 +118,10 @@
     <p>The rest 80%(except game expenses, which is around 0.0001%) is distributed to winners as below:</p>
 
     <ul>
-        <li>3 matchers get:</li>
-        <li>4 matchers get:</li>
-        <li>5 matchers get:</li>
-        <li>6 matchers get:</li>
+        <li>3 matchers get: %70</li>
+        <li>4 matchers get: %15</li>
+        <li>5 matchers get: %10</li>
+        <li>6 matchers get: %5</li>
     </ul>
 
     <p>Government organized lotteries ussually give out between 40% - 50% of the pool.</p>
@@ -135,15 +137,13 @@
 
     <p>No, Butterfly Lottery doesn't belong to anybody or any company or government. It is a smart contract on Solana Blockchain. As we stated above you can take part in controlling coupons and
         hosting
-        the game without any permission or register.</p>
-    <p>For a while we will be controlling lottery settings like how often we have draw, coupon price, share of prizes and controllers etc. But we are planning and working on creating a community
+        the game without any permission or register. The files you need to interact with the Butterfly Lottery are <a href="https://github.com/butterflylottery/butterflylottery.github.io/blob/main/assets" target="_blank">here</a>.</p>
+    <p>For a while we will be controlling lottery settings like how often we have draw, coupon price, share of prizes and controllers etc. But we are working on the community
         program
         where community members can vote and offer changes with Butterfly Lottery Token.</p>
-    <p>Butterfly Lottery Token is not listed on any market yet. However, we are planning airdrops.</p>
 
     <p>Join our discord channel to hear about us (https://discord.gg/pmv9Cuc2DS).</p>
-    <p>Finally we will make our program immutable on blockchain and open our source code.</p>
-    <p>discord : https://discord.gg/pmv9Cuc2DS</p>
+
 </div>
 </body>
 </html>
