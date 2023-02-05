@@ -263,15 +263,15 @@ import {
 
 
   }
+    
+    
+    const get_final_randomness_and_lucky_numbers = async() => {
 
-  const get_final_randomness_and_lucky_numbers = async() => {
+    const lottery_info = await connection.getAccountInfo(lottery);
+    const lottery_account = deserialize(LottoSchema,Lottery,lottery_info!.data);
 
-    const final_randomness_account = await connection.getAccountInfo(lottery);
-    const final_randomness = deserialize(LottoSchema,Lottery,final_randomness_account!.data);
+    console.log(lottery_account.randomness);
 
-    console.log(final_randomness.randomness);
-
-    let lotto_array = Buffer.from(final_randomness);
 
     let x1 = 0;
     let x2 = 0;
@@ -282,69 +282,22 @@ import {
 
     let index = 0;
 
-    for (let i = 0; i < lotto_array.length; i++){
-      if(lotto_array[index] > 64){
-        x1 = lotto_array[index];
-        break
-      }
-      index = i;
+    let randomness_array:number[] = [];
+
+    for (var i = 0; i < lottery_account.randomness.length; ++i) {
+      var byte = lottery_account.randomness.charCodeAt(i);
+
+      randomness_array = randomness_array.concat([byte]);
+
     }
 
-    for (let i = index; i < lotto_array.length; i++){
-      if(lotto_array[index] > 64 
-        && x1 != lotto_array[index]){
-        x2 = lotto_array[index];
-        break
-      }
-      index = i;
-    }
+    [x1,index] =  draw_a_number(x1,x2,x3,x4,x5,x1,index,randomness_array);
+    [x2,index] =  draw_a_number(x1,x2,x3,x4,x5,x2,index,randomness_array);
+    [x3,index] =  draw_a_number(x1,x2,x3,x4,x5,x3,index,randomness_array);
+    [x4,index] =  draw_a_number(x1,x2,x3,x4,x5,x4,index,randomness_array);
+    [x5,index] =  draw_a_number(x1,x2,x3,x4,x5,x5,index,randomness_array);
+    [x6,index] =  draw_a_number(x1,x2,x3,x4,x5,x6,index,randomness_array);
 
-    for (let i = index; i < lotto_array.length; i++){
-      if(lotto_array[index] > 64 
-        && x1 != lotto_array[index]
-        && x2 != lotto_array[index]){
-        x3 = lotto_array[index];
-        break
-      }
-      index = i;
-    }
-    for (let i = index; i < lotto_array.length; i++){
-      if(lotto_array[index] > 64 
-        && x1 != lotto_array[index]
-        && x2 != lotto_array[index]
-        && x3 != lotto_array[index]){
-        x4 = lotto_array[index];
-        break
-      }
-      index = i;
-    }
-
-    for (let i = index; i < lotto_array.length; i++){
-      if(lotto_array[index] > 64 
-        && x1 != lotto_array[index]
-        && x2 != lotto_array[index]
-        && x3 != lotto_array[index]
-        && x4 != lotto_array[index]){
-        x5 = lotto_array[index];
-        break
-      }
-      index = i;
-    }
-
-    for (let i = index; i < lotto_array.length; i++){
-      if(lotto_array[index] > 64 
-        && x1 != lotto_array[index]
-        && x2 != lotto_array[index]
-        && x3 != lotto_array[index]
-        && x4 != lotto_array[index]
-        && x5 != lotto_array[index]){
-        x6 = lotto_array[index];
-        break
-      }
-      index = i;
-    }
-
-    
 
       let number_pool = [1,2,3,4,5,6,7,8,0,9,10,11,12,13,0,14,15,16,17,18,19,20,21,22,23,24,0,
       0,0,0,0,0,25,26,27,28,29,30,31,32,33,34,35,0,36,37,38,39,40,41,42,43,44,45,46,47,48,49];
@@ -364,10 +317,26 @@ import {
       let number6 = number_pool[index6];
 
       console.log(number1, number2, number3, number4, number5, number6);
-  
 
   }
+    
+    
+  function draw_a_number(x1:number,x2:number,x3:number,x4:number,x5:number, x:number,index:number,lotto_arr:number[]){
+    for (let i = index; i < lotto_arr.length; i++){
+      if(lotto_arr[index] > 64 && x1 != lotto_arr[index]
+        && x2 != lotto_arr[index]
+        && x3 != lotto_arr[index]
+        && x4 != lotto_arr[index]
+        && x5 != lotto_arr[index]){
+        x = lotto_arr[index];
+        break
+      }
+      index = i;
+    }
+    return [x,index];
+  }
 
+ 
   //gets randomness of all subregisters including first set and second set
   const get_randomness_of_all_subregister = async() => {
 
